@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<title>React JS Tutorial</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+//Stateless Components- you can pass props and data torender
+//Stateless Function simple returns some content 
+//does not mutate it, no default data or anything
+
+var TaskList = React.createClass({
+    getInitialState: function(){
+        return{
+            tasks: [
+                {title: 'Clean Dishes', id:1},
+                {title: 'Take out the bins', id:2},
+                {title: 'Change Bed', id:3}
+            ]
+        }
+    },
+//map function iterates through the array you pass it
+    render: function(){
+        return(
+            <ul>
+                {
+                    this.state.tasks.map(function(task){
+                        return <Task title={task.title}  key={task.id}/>
+                    })}
+            </ul>
+        )
+    }
+});
+
+
+var Task = function(props){
+    return(
+        <li> Task: {props.title}</li>
+    )
+};
+
+
+ReactDOM.render(
+    <TaskList />,
+    document.getElementById('app')
+)
+
+
+</script>
+</body>
+</html>

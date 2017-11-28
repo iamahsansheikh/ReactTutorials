@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<title>React JS Tutorial</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+<script type="text/babel">
+
+//es6
+//equivalent t o var counter = React.createClass
+
+class Counter extends React.Component
+{
+//Get Initial State - we have to use constructor
+constructor(props){
+    super(props); //Gives access to keyword 'this' in ES6 Components  
+    console.log(props);
+    this.state = {count: 0}
+    this.click = this.click.bind(this);
+}
+
+click(value)
+{
+    console.log(value);
+}
+
+    render(){
+        console.log(this.state);
+        return(
+            <div onClick={() => this.click(10)}>{this.props.text} </div>
+        )
+    }
+}
+
+//Class name to get Default Props
+Counter.defaultProps = {text: "Hello"}
+
+//Prop Types
+Counter.propTypes = {text: React.PropTypes.string}
+
+
+ReactDOM.render(
+    <Counter />,
+    document.getElementById('app')
+);
+
+</script>
+</body>
+</html>

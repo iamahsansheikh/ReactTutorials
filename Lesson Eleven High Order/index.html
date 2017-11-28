@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<title>React Challenge Tutorial</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+<link rel="stylesheet" type="text/css" href="lesson11styling.css">
+</head>
+<body>
+
+<div id="app"></div>
+<script type="text/babel">
+
+//array function - Basic Component is an argument and returns react component
+
+let BaseCount = (BasicComponent) => class extends React.Component
+{
+
+constructor(props){
+super(props);
+this.state = {
+    count:0
+    }
+    this.incrementCount = this.incrementCount.bind(this);
+}
+
+incrementCount(){
+    this.setState({
+        count: this.state.count + 1
+    })
+}
+
+render(){
+    return(
+        <div className="container">
+            <BasicComponent count={this.state.count} increment={this.incrementCount} /> 
+        </div>
+    )
+}
+}
+
+//Stateless Function Component
+const Button = (props) =>{
+    console.log(props);
+    return(
+        <button className="btn blue-btn" onClick={props.increment}> Count: {props.count} </button>
+    )
+}
+
+const Label = (props) =>{
+    return(
+        <label onMouseMove={props.increment}> Count: {props.count} </label>
+    )
+}
+
+
+
+//Pass Stateless to higher order
+
+let ExtendedButton = BaseCount(Button);
+let ExtendedLabel = BaseCount(Label);
+
+
+class Container extends React.Component{
+    render(){
+        return(
+            <div> 
+            <ExtendedButton />
+            <ExtendedLabel />
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <Container />,
+    document.getElementById('app')
+);
+
+</script>
+</body>
+</html>

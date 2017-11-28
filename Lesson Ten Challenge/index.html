@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<title>React Challenge Tutorial</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div id="app"></div>
+<script type="text/babel">
+
+class Counter extends React.Component
+{
+//Get Initial State - we have to use constructor
+constructor(props){
+    super(props); //Gives access to keyword 'this' in ES6 Components  
+    console.log(props);
+    this.state = {count: 0}
+   // this.click = this.click.bind(this);
+}
+
+increment(value)
+{
+    console.log(this);
+    this.setState({
+        count: this.state.count + value
+    })
+}
+
+    render(){
+        console.log(this.state);
+        return(
+            <div className="container"> 
+            <h1>Count: {this.state.count} </h1>
+            <button className="btn blue-btn" onClick={this.increment.bind(this, 100)}> {this.props.text} {this.props.valueOne}  </button>
+            <button className="btn green-btn" onClick={this.increment.bind(this, 1000)}> {this.props.text} {this.props.valueTwo}  </button>
+            <button className="btn purple-btn" onClick={this.increment.bind(this, 10000)}> {this.props.text} {this.props.valueThree} </button>
+            <div onClick={() => this.click(10)}>{this.props.text} </div>
+                </div>
+        )
+    }
+}
+
+//Class name to get Default Props
+Counter.defaultProps = {
+    valueOne: 100,
+    valueTwo : 1000,
+    valueThree: 10000,
+    text: 'Add'
+}
+
+//Prop Types
+Counter.propTypes = {text: React.PropTypes.string}
+
+
+ReactDOM.render(
+    <Counter  />,
+    document.getElementById('app')
+);
+
+</script>
+</body>
+</html>
